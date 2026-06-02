@@ -1,0 +1,13 @@
+{
+  email admin@naql.ma
+}
+
+# Local dev: plain HTTP
+:80 {
+  reverse_proxy web:3000
+}
+
+# Production: replace :80 with your domain and Caddy handles HTTPS automatically
+# naql.ma {
+#   reverse_proxy web:3000
+# }

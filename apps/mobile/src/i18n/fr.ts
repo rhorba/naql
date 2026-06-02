@@ -1,0 +1,80 @@
+export const fr = {
+  sync: {
+    idle: "Synchronisé",
+    syncing: "Synchronisation…",
+    error: "Erreur de sync",
+    offline: "Hors ligne",
+  },
+  missions: {
+    title: "Mes missions",
+    noMissions: "Aucune mission assignée",
+    refresh: "Tirer pour actualiser",
+    status: {
+      planned: "Planifiée",
+      in_progress: "En cours",
+      completed: "Terminée",
+      cancelled: "Annulée",
+    },
+    actions: {
+      start: "Démarrer",
+      complete: "Terminer",
+      cancel: "Annuler",
+    },
+    confirmStart: "Démarrer cette mission ?",
+    confirmComplete: "Terminer cette mission ?",
+  },
+  fuel: {
+    title: "Enregistrer un plein",
+    litres: "Litres *",
+    pricePerLitre: "Prix / litre (MAD) *",
+    odometer: "Compteur kilométrique",
+    station: "Station",
+    receipt: "Reçu (photo)",
+    photographReceipt: "Photographier le reçu",
+    changePhoto: "Changer la photo",
+    save: "Enregistrer le plein",
+    saving: "Enregistrement…",
+    saved: "Plein sauvegardé",
+    syncPending: "Synchronisation en cours…",
+    validation: {
+      required: "Litres et prix requis",
+      cameraPermission: "L'accès à l'appareil photo est nécessaire.",
+    },
+  },
+  ocr: {
+    analyzing: "Analyse du reçu…",
+    reviewTitle: "Vérifier les données",
+    reviewSubtitle:
+      "L'OCR a pré-rempli les champs ci-dessous. Veuillez vérifier avant de sauvegarder.",
+    lowConfidence: "Confiance faible — veuillez vérifier manuellement",
+    confirm: "Confirmer et sauvegarder",
+    skip: "Saisir manuellement",
+  },
+  attendance: {
+    title: "Pointage du jour",
+    present: "Présent",
+    absent: "Absent",
+    leave: "Congé",
+    hoursWorked: "Heures travaillées",
+    clock: "Pointer",
+    clocking: "Enregistrement…",
+    clocked: "✓ Pointage enregistré",
+    syncNote: "Le pointage sera synchronisé automatiquement",
+  },
+  pod: {
+    title: "Preuve de livraison",
+    photo: "Photo de livraison",
+    takePhoto: "Prendre une photo",
+    signature: "Signature du client",
+    confirm: "Confirmer la livraison",
+  },
+  common: {
+    error: "Une erreur est survenue",
+    retry: "Réessayer",
+    cancel: "Annuler",
+    confirm: "Confirmer",
+    save: "Sauvegarder",
+  },
+} as const;
+
+export type Messages = typeof fr;

@@ -1,0 +1,214 @@
+﻿{
+  "nav": {
+    "exploitation": "Operations",
+    "missions": "Missions",
+    "fleet": "Fleet",
+    "fuel": "Fuel & Consumption",
+    "finance": "Commercial & Finance",
+    "clients": "Clients",
+    "invoicing": "Invoicing",
+    "payments": "Payments",
+    "cash": "Cash / Bank",
+    "expenses": "Expenses",
+    "profitability": "Profitability",
+    "hr": "Human Resources",
+    "employees": "Employees",
+    "attendance": "Attendance",
+    "payroll": "Payroll",
+    "settings": "Settings"
+  },
+  "auth": {
+    "login": "Sign In",
+    "signup": "Create Account",
+    "email": "Email",
+    "password": "Password",
+    "orgName": "Company Name",
+    "fullName": "Full Name",
+    "loginButton": "Sign In",
+    "signupButton": "Create Account",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome to Naql",
+    "tagline": "Manage all your transport. From one platform."
+  },
+  "ocr": {
+    "title": "Receipt Capture — OCR",
+    "subtitle": "Photograph a fuel receipt to auto-fill the form.",
+    "analyze": "Analyze",
+    "analyzing": "Analyzing...",
+    "confidence": "OCR Confidence",
+    "requiresReview": "Please verify the fields before saving.",
+    "confirmed": "Data extracted. Review then save.",
+    "confirm": "Confirm & Save",
+    "lowConfidence": "Low confidence — manual entry recommended"
+  },
+  "hr": {
+    "employees": "Employees",
+    "attendance": "Attendance",
+    "payroll": "Payroll",
+    "advances": "Advances",
+    "contractType": { "cdi": "Permanent", "cdd": "Fixed-term", "interim": "Temporary" },
+    "attendanceStatus": { "present": "Present", "absent": "Absent", "leave": "Leave" },
+    "payslip": {
+      "gross": "Gross",
+      "cnss": "CNSS",
+      "amo": "AMO",
+      "ir": "Income Tax",
+      "advances": "Advances",
+      "net": "Net Pay",
+      "employerCost": "Employer Cost"
+    }
+  },
+  "finance": {
+    "invoiceStatus": {
+      "draft": "Draft",
+      "sent": "Sent",
+      "partial": "Partial",
+      "paid": "Paid",
+      "overdue": "Overdue",
+      "cancelled": "Cancelled"
+    },
+    "paymentMethod": {
+      "cash": "Cash",
+      "bank": "Bank Transfer",
+      "cheque": "Cheque",
+      "other": "Other"
+    },
+    "expenseCategory": {
+      "fuel": "Fuel",
+      "maintenance": "Maintenance",
+      "tolls": "Tolls",
+      "salary": "Salary",
+      "admin": "Administrative",
+      "other": "Other"
+    },
+    "fields": {
+      "subtotal": "Subtotal (excl. tax)",
+      "vat": "VAT",
+      "total": "Total (incl. tax)",
+      "ice": "ICE",
+      "issueDate": "Issue Date",
+      "dueDate": "Due Date",
+      "costPerKm": "Cost / km",
+      "grossMargin": "Gross Margin",
+      "marginPct": "Margin %"
+    }
+  },
+  "missions": {
+    "title": "Missions",
+    "newMission": "New Mission",
+    "status": {
+      "planned": "Planned",
+      "in_progress": "In Progress",
+      "completed": "Completed",
+      "invoiced": "Invoiced",
+      "cancelled": "Cancelled"
+    },
+    "fields": {
+      "client": "Client",
+      "origin": "Origin",
+      "destination": "Destination",
+      "cargo": "Cargo",
+      "agreedPrice": "Agreed Price",
+      "startDate": "Departure",
+      "vehicle": "Vehicle",
+      "driver": "Driver"
+    },
+    "actions": {
+      "start": "Start",
+      "complete": "Complete",
+      "invoice": "Invoice",
+      "cancel": "Cancel"
+    }
+  },
+  "fuel": {
+    "title": "Fuel & Consumption",
+    "newLog": "Fuel Fill",
+    "consumption": "Consumption",
+    "overConsumption": "Over-consumption",
+    "ranking": "Anomalies ranked by impact",
+    "fields": {
+      "vehicle": "Vehicle",
+      "litres": "Litres",
+      "pricePerLitre": "Price/litre",
+      "total": "Total",
+      "odometer": "Odometer",
+      "station": "Station",
+      "date": "Date",
+      "source": "Source"
+    },
+    "source": {
+      "driver_app": "App",
+      "desktop": "Desktop",
+      "ocr": "OCR"
+    },
+    "severity": {
+      "warning": "Warning",
+      "critical": "Critical",
+      "needsReview": "Needs Review"
+    }
+  },
+  "fleet": {
+    "title": "Fleet",
+    "newVehicle": "New Vehicle",
+    "noVehicles": "No vehicles registered.",
+    "status": {
+      "available": "Available",
+      "on_mission": "On Mission",
+      "maintenance": "Maintenance",
+      "out_of_service": "Out of Service"
+    },
+    "docKind": {
+      "insurance": "Insurance",
+      "technical_inspection": "Technical Inspection",
+      "license": "License",
+      "other": "Other"
+    },
+    "fields": {
+      "code": "Code",
+      "registration": "Registration",
+      "make": "Make",
+      "model": "Model",
+      "year": "Year",
+      "type": "Type",
+      "capacityKg": "Capacity (kg)",
+      "baselineConsumption": "Baseline (L/100km)"
+    }
+  },
+  "alerts": {
+    "title": "Active Alerts",
+    "noAlerts": "No active alerts.",
+    "kind": {
+      "document_expiry": "Expiring Document",
+      "contract_renewal": "Contract Renewal",
+      "invoice_overdue": "Overdue Invoice",
+      "over_consumption": "Over-consumption"
+    }
+  },
+  "roles": {
+    "owner": "Owner",
+    "manager": "Manager",
+    "accountant": "Accountant",
+    "driver": "Driver"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "search": "Search",
+    "status": "Status",
+    "actions": "Actions",
+    "signOut": "Sign out",
+    "noData": "No data available.",
+    "backToList": "Back",
+    "detail": "Detail",
+    "confirm": "Confirm"
+  }
+}

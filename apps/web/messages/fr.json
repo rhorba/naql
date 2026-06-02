@@ -1,0 +1,214 @@
+{
+  "nav": {
+    "exploitation": "Exploitation",
+    "missions": "Missions",
+    "fleet": "Flotte",
+    "fuel": "Gasoil / Consommation",
+    "finance": "Commercial & Finance",
+    "clients": "Clients",
+    "invoicing": "Facturation",
+    "payments": "Paiements",
+    "cash": "Caisse / Banque",
+    "expenses": "Dépenses",
+    "profitability": "Rentabilité",
+    "hr": "Ressources Humaines",
+    "employees": "Employés",
+    "attendance": "Pointage",
+    "payroll": "Paie",
+    "settings": "Paramètres"
+  },
+  "auth": {
+    "login": "Connexion",
+    "signup": "Créer un compte",
+    "email": "Email",
+    "password": "Mot de passe",
+    "orgName": "Nom de l'entreprise",
+    "fullName": "Nom complet",
+    "loginButton": "Se connecter",
+    "signupButton": "Créer mon compte",
+    "noAccount": "Pas encore de compte ?",
+    "hasAccount": "Déjà un compte ?"
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "welcome": "Bienvenue sur Naql",
+    "tagline": "Gérez tout votre transport. Depuis une seule plateforme."
+  },
+  "ocr": {
+    "title": "Capture de reçu — OCR",
+    "subtitle": "Photographiez un reçu pour pré-remplir le formulaire automatiquement.",
+    "analyze": "Analyser",
+    "analyzing": "Analyse en cours…",
+    "confidence": "Confiance OCR",
+    "requiresReview": "Veuillez vérifier les champs avant de sauvegarder.",
+    "confirmed": "Données extraites. Vérifiez puis sauvegardez.",
+    "confirm": "Confirmer et sauvegarder",
+    "lowConfidence": "Confiance faible — saisie manuelle recommandée"
+  },
+  "hr": {
+    "employees": "Employés",
+    "attendance": "Pointage",
+    "payroll": "Paie",
+    "advances": "Avances",
+    "contractType": { "cdi": "CDI", "cdd": "CDD", "interim": "Intérim" },
+    "attendanceStatus": { "present": "Présent", "absent": "Absent", "leave": "Congé" },
+    "payslip": {
+      "gross": "Brut",
+      "cnss": "CNSS",
+      "amo": "AMO",
+      "ir": "IR",
+      "advances": "Avances",
+      "net": "Net à payer",
+      "employerCost": "Coût employeur"
+    }
+  },
+  "finance": {
+    "invoiceStatus": {
+      "draft": "Brouillon",
+      "sent": "Envoyée",
+      "partial": "Partiel",
+      "paid": "Payée",
+      "overdue": "En retard",
+      "cancelled": "Annulée"
+    },
+    "paymentMethod": {
+      "cash": "Espèces",
+      "bank": "Virement",
+      "cheque": "Chèque",
+      "other": "Autre"
+    },
+    "expenseCategory": {
+      "fuel": "Gasoil",
+      "maintenance": "Maintenance",
+      "tolls": "Péages",
+      "salary": "Salaire",
+      "admin": "Administratif",
+      "other": "Autre"
+    },
+    "fields": {
+      "subtotal": "Sous-total HT",
+      "vat": "TVA",
+      "total": "Total TTC",
+      "ice": "ICE",
+      "issueDate": "Date d'émission",
+      "dueDate": "Date d'échéance",
+      "costPerKm": "Coût / km",
+      "grossMargin": "Marge brute",
+      "marginPct": "Taux de marge"
+    }
+  },
+  "missions": {
+    "title": "Missions",
+    "newMission": "Nouvelle mission",
+    "status": {
+      "planned": "Planifiée",
+      "in_progress": "En cours",
+      "completed": "Terminée",
+      "invoiced": "Facturée",
+      "cancelled": "Annulée"
+    },
+    "fields": {
+      "client": "Client",
+      "origin": "Origine",
+      "destination": "Destination",
+      "cargo": "Marchandise",
+      "agreedPrice": "Prix convenu",
+      "startDate": "Départ",
+      "vehicle": "Véhicule",
+      "driver": "Chauffeur"
+    },
+    "actions": {
+      "start": "Démarrer",
+      "complete": "Terminer",
+      "invoice": "Facturer",
+      "cancel": "Annuler"
+    }
+  },
+  "fuel": {
+    "title": "Gasoil & Consommation",
+    "newLog": "Plein de carburant",
+    "consumption": "Consommation",
+    "overConsumption": "Surconsommation",
+    "ranking": "Anomalies classées par impact",
+    "fields": {
+      "vehicle": "Véhicule",
+      "litres": "Litres",
+      "pricePerLitre": "Prix/litre",
+      "total": "Total",
+      "odometer": "Compteur",
+      "station": "Station",
+      "date": "Date",
+      "source": "Source"
+    },
+    "source": {
+      "driver_app": "App",
+      "desktop": "Bureau",
+      "ocr": "OCR"
+    },
+    "severity": {
+      "warning": "Avertissement",
+      "critical": "Critique",
+      "needsReview": "À vérifier"
+    }
+  },
+  "fleet": {
+    "title": "Flotte",
+    "newVehicle": "Nouveau véhicule",
+    "noVehicles": "Aucun véhicule enregistré.",
+    "status": {
+      "available": "Disponible",
+      "on_mission": "En mission",
+      "maintenance": "Maintenance",
+      "out_of_service": "Hors service"
+    },
+    "docKind": {
+      "insurance": "Assurance",
+      "technical_inspection": "Visite technique",
+      "license": "Licence",
+      "other": "Autre"
+    },
+    "fields": {
+      "code": "Code",
+      "registration": "Immatriculation",
+      "make": "Marque",
+      "model": "Modèle",
+      "year": "Année",
+      "type": "Type",
+      "capacityKg": "Capacité (kg)",
+      "baselineConsumption": "Conso. de base (L/100km)"
+    }
+  },
+  "alerts": {
+    "title": "Alertes actives",
+    "noAlerts": "Aucune alerte active.",
+    "kind": {
+      "document_expiry": "Document expirant",
+      "contract_renewal": "Renouvellement de contrat",
+      "invoice_overdue": "Facture en retard",
+      "over_consumption": "Surconsommation"
+    }
+  },
+  "roles": {
+    "owner": "Propriétaire",
+    "manager": "Responsable",
+    "accountant": "Comptable",
+    "driver": "Chauffeur"
+  },
+  "common": {
+    "loading": "Chargement…",
+    "error": "Une erreur est survenue",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "create": "Créer",
+    "search": "Rechercher",
+    "status": "Statut",
+    "actions": "Actions",
+    "signOut": "Déconnexion",
+    "noData": "Aucune donnée disponible.",
+    "backToList": "← Retour",
+    "detail": "Détail →",
+    "confirm": "Confirmer"
+  }
+}

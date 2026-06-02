@@ -1,0 +1,214 @@
+{
+  "nav": {
+    "exploitation": "التشغيل",
+    "missions": "المهام",
+    "fleet": "الأسطول",
+    "fuel": "الوقود / الاستهلاك",
+    "finance": "التجارة والمالية",
+    "clients": "العملاء",
+    "invoicing": "الفواتير",
+    "payments": "المدفوعات",
+    "cash": "الصندوق / البنك",
+    "expenses": "المصروفات",
+    "profitability": "الربحية",
+    "hr": "الموارد البشرية",
+    "employees": "الموظفون",
+    "attendance": "الحضور",
+    "payroll": "الرواتب",
+    "settings": "الإعدادات"
+  },
+  "auth": {
+    "login": "تسجيل الدخول",
+    "signup": "إنشاء حساب",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "orgName": "اسم الشركة",
+    "fullName": "الاسم الكامل",
+    "loginButton": "دخول",
+    "signupButton": "إنشاء حسابي",
+    "noAccount": "ليس لديك حساب؟",
+    "hasAccount": "لديك حساب بالفعل؟"
+  },
+  "dashboard": {
+    "title": "لوحة التحكم",
+    "welcome": "مرحباً بك في نقل",
+    "tagline": "أدِر نقلك بالكامل. من منصة واحدة."
+  },
+  "ocr": {
+    "title": "تصوير الفاتورة — OCR",
+    "subtitle": "صوِّر فاتورة الوقود لملء النموذج تلقائياً.",
+    "analyze": "تحليل",
+    "analyzing": "جارٍ التحليل…",
+    "confidence": "دقة الاستخراج",
+    "requiresReview": "يرجى التحقق من الحقول قبل الحفظ.",
+    "confirmed": "تم استخراج البيانات. تحقق ثم احفظ.",
+    "confirm": "تأكيد والحفظ",
+    "lowConfidence": "دقة منخفضة — يُنصح بالإدخال اليدوي"
+  },
+  "hr": {
+    "employees": "الموظفون",
+    "attendance": "الحضور",
+    "payroll": "الرواتب",
+    "advances": "السلف",
+    "contractType": { "cdi": "دائم", "cdd": "محدد المدة", "interim": "مؤقت" },
+    "attendanceStatus": { "present": "حاضر", "absent": "غائب", "leave": "إجازة" },
+    "payslip": {
+      "gross": "الإجمالي",
+      "cnss": "CNSS",
+      "amo": "AMO",
+      "ir": "ضريبة الدخل",
+      "advances": "السلف",
+      "net": "صافي الراتب",
+      "employerCost": "تكلفة صاحب العمل"
+    }
+  },
+  "finance": {
+    "invoiceStatus": {
+      "draft": "مسودة",
+      "sent": "مُرسَلة",
+      "partial": "جزئي",
+      "paid": "مدفوعة",
+      "overdue": "متأخرة",
+      "cancelled": "ملغاة"
+    },
+    "paymentMethod": {
+      "cash": "نقداً",
+      "bank": "تحويل بنكي",
+      "cheque": "شيك",
+      "other": "أخرى"
+    },
+    "expenseCategory": {
+      "fuel": "الوقود",
+      "maintenance": "الصيانة",
+      "tolls": "الرسوم",
+      "salary": "الراتب",
+      "admin": "إداري",
+      "other": "أخرى"
+    },
+    "fields": {
+      "subtotal": "المجموع دون الضريبة",
+      "vat": "ضريبة القيمة المضافة",
+      "total": "المجموع الكلي",
+      "ice": "ICE",
+      "issueDate": "تاريخ الإصدار",
+      "dueDate": "تاريخ الاستحقاق",
+      "costPerKm": "التكلفة / كم",
+      "grossMargin": "الهامش الإجمالي",
+      "marginPct": "نسبة الهامش"
+    }
+  },
+  "missions": {
+    "title": "المهام",
+    "newMission": "مهمة جديدة",
+    "status": {
+      "planned": "مخططة",
+      "in_progress": "جارية",
+      "completed": "منجزة",
+      "invoiced": "مفوترة",
+      "cancelled": "ملغاة"
+    },
+    "fields": {
+      "client": "العميل",
+      "origin": "الانطلاق",
+      "destination": "الوصول",
+      "cargo": "البضاعة",
+      "agreedPrice": "السعر المتفق عليه",
+      "startDate": "تاريخ الانطلاق",
+      "vehicle": "المركبة",
+      "driver": "السائق"
+    },
+    "actions": {
+      "start": "بدء",
+      "complete": "إنهاء",
+      "invoice": "إصدار فاتورة",
+      "cancel": "إلغاء"
+    }
+  },
+  "fuel": {
+    "title": "الوقود والاستهلاك",
+    "newLog": "تعبئة وقود",
+    "consumption": "الاستهلاك",
+    "overConsumption": "الاستهلاك الزائد",
+    "ranking": "الشذوذات مرتبة حسب الأثر",
+    "fields": {
+      "vehicle": "المركبة",
+      "litres": "اللترات",
+      "pricePerLitre": "السعر/لتر",
+      "total": "المجموع",
+      "odometer": "العداد",
+      "station": "المحطة",
+      "date": "التاريخ",
+      "source": "المصدر"
+    },
+    "source": {
+      "driver_app": "التطبيق",
+      "desktop": "المكتب",
+      "ocr": "OCR"
+    },
+    "severity": {
+      "warning": "تحذير",
+      "critical": "حرج",
+      "needsReview": "يحتاج مراجعة"
+    }
+  },
+  "fleet": {
+    "title": "الأسطول",
+    "newVehicle": "مركبة جديدة",
+    "noVehicles": "لا توجد مركبات مسجلة.",
+    "status": {
+      "available": "متاح",
+      "on_mission": "في مهمة",
+      "maintenance": "صيانة",
+      "out_of_service": "خارج الخدمة"
+    },
+    "docKind": {
+      "insurance": "التأمين",
+      "technical_inspection": "الفحص التقني",
+      "license": "الرخصة",
+      "other": "أخرى"
+    },
+    "fields": {
+      "code": "الرمز",
+      "registration": "رقم التسجيل",
+      "make": "الصانع",
+      "model": "الطراز",
+      "year": "السنة",
+      "type": "النوع",
+      "capacityKg": "الحمولة (كغ)",
+      "baselineConsumption": "الاستهلاك الأساسي (ل/100كم)"
+    }
+  },
+  "alerts": {
+    "title": "التنبيهات النشطة",
+    "noAlerts": "لا توجد تنبيهات نشطة.",
+    "kind": {
+      "document_expiry": "وثيقة منتهية",
+      "contract_renewal": "تجديد العقد",
+      "invoice_overdue": "فاتورة متأخرة",
+      "over_consumption": "استهلاك زائد"
+    }
+  },
+  "roles": {
+    "owner": "المالك",
+    "manager": "المسؤول",
+    "accountant": "المحاسب",
+    "driver": "السائق"
+  },
+  "common": {
+    "loading": "جاري التحميل…",
+    "error": "حدث خطأ ما",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "create": "إنشاء",
+    "search": "بحث",
+    "status": "الحالة",
+    "actions": "الإجراءات",
+    "signOut": "تسجيل الخروج",
+    "noData": "لا توجد بيانات.",
+    "backToList": "→ رجوع",
+    "detail": "التفاصيل ←",
+    "confirm": "تأكيد"
+  }
+}

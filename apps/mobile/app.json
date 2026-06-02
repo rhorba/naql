@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "Naql",
+    "slug": "naql-driver",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "scheme": "naql",
+    "android": {
+      "package": "ma.naql.driver",
+      "adaptiveIcon": {
+        "backgroundColor": "#f59e0b"
+      }
+    },
+    "ios": {
+      "bundleIdentifier": "ma.naql.driver",
+      "supportsTablet": false
+    },
+    "plugins": [
+      "expo-router",
+      "expo-sqlite",
+      "expo-secure-store",
+      [
+        "expo-camera",
+        { "cameraPermission": "Naql uses the camera to capture fuel receipts and delivery proof." }
+      ],
+      ["expo-image-picker", { "photosPermission": "Naql accesses photos to attach fuel receipts." }]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
