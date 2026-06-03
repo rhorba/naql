@@ -2,7 +2,7 @@ import type { Role } from "@naql/core";
 import { db } from "@naql/db";
 import { users } from "@naql/db/schema";
 import { eq } from "drizzle-orm";
-import NextAuth from "next-auth";
+import NextAuth, { type NextAuthConfig, type NextAuthResult } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { z } from "zod";
 
@@ -11,8 +11,8 @@ const loginSchema = z.object({
   password: z.string().min(1),
 });
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
-  secret: process.env.AUTH_SECRET,
+const authConfig = {
+  secret: process.env.AUTH_SECRET!,
   session: { strategy: "jwt" },
   pages: {
     signIn: "/fr/login",
@@ -55,7 +55,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     jwt({ token, user }) {
       if (user) {
-        // user is the object returned from authorize()
         const u = user as typeof user & {
           organizationId: string;
           role: Role;
@@ -71,7 +70,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return session;
     },
   },
-});
+} satisfies NextAuthConfig;
+
+export const { handlers, signIn, signOut, auth }: NextAuthResult = NextAuth(
+  authConfig
+) as NextAuthResult;
 
 declare module "next-auth" {
   interface Session {

@@ -1,9 +1,9 @@
+import { ForbiddenError } from "@naql/core";
 /**
  * Tests for the withTenant wrapper using vitest mocks.
  * We mock auth() and the DB context to test the middleware logic.
  */
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { ForbiddenError } from "@naql/core";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 // Mock next-auth
 vi.mock("@/auth", () => ({
@@ -17,12 +17,18 @@ vi.mock("@naql/db", () => ({
 }));
 
 import { auth } from "@/auth";
-import { withTenant, AuthError } from "../lib/with-tenant";
+import { AuthError, withTenant } from "../lib/with-tenant";
 
 const mockAuth = vi.mocked(auth);
 
 const OWNER_SESSION = {
-  user: { id: "user-1", organizationId: "org-1", role: "owner" as const, name: "Jamal", email: "jamal@test.ma" },
+  user: {
+    id: "user-1",
+    organizationId: "org-1",
+    role: "owner" as const,
+    name: "Jamal",
+    email: "jamal@test.ma",
+  },
 };
 
 describe("withTenant wrapper", () => {
@@ -37,7 +43,9 @@ describe("withTenant wrapper", () => {
   });
 
   it("throws AuthError when session has no organizationId", async () => {
-    mockAuth.mockResolvedValueOnce({ user: { id: "u1", role: "driver", email: "x@x.com" } } as never);
+    mockAuth.mockResolvedValueOnce({
+      user: { id: "u1", role: "driver", email: "x@x.com" },
+    } as never);
     const action = withTenant(null, async () => "ok");
     await expect(action({})).rejects.toThrow(AuthError);
   });

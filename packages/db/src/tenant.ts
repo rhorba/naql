@@ -12,9 +12,10 @@ import type { Database } from "./client.js";
  */
 export async function withOrgContext<T>(
   db: Database,
-  organizationId: string,
+  organizationId: string | undefined,
   fn: (db: Database) => Promise<T>
 ): Promise<T> {
+  if (!organizationId) throw new Error("withOrgContext: organizationId is required");
   return db.transaction(async (tx) => {
     await tx.execute(sql`SELECT set_config('app.current_org', ${organizationId}, true)`);
     return fn(tx as unknown as Database);

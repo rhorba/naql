@@ -1,6 +1,6 @@
-import { describe, it, expect } from "vitest";
-import { computeVat, computeTotal, DEFAULT_VAT_RATE } from "../vat";
 import type { Money } from "@naql/core";
+import { describe, expect, it } from "vitest";
+import { DEFAULT_VAT_RATE, computeTotal, computeVat } from "../vat";
 
 describe("VAT computation", () => {
   it("DEFAULT_VAT_RATE is 20", () => {

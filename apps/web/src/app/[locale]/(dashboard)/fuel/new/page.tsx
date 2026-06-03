@@ -2,10 +2,12 @@ import { auth } from "@/auth";
 import { FuelLogForm } from "@/components/fuel/fuel-log-form";
 import { db, withOrgContext } from "@naql/db";
 import { vehicles } from "@naql/db/schema";
+import { notFound } from "next/navigation";
 
 export default async function NewFuelLogPage() {
   const session = await auth();
-  const orgId = session?.user.organizationId;
+  if (!session?.user) notFound();
+  const orgId = session.user.organizationId;
 
   const vehicleList = await withOrgContext(db, orgId, async (tx) => {
     return tx.select({ id: vehicles.id, code: vehicles.code, make: vehicles.make }).from(vehicles);

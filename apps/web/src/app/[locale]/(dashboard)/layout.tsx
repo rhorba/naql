@@ -3,9 +3,10 @@ import { Sidebar } from "@/components/shell/sidebar";
 import { SkipLink } from "@/components/shell/skip-link";
 import { TopBar } from "@/components/shell/topbar";
 import { redirect } from "next/navigation";
+import type { ReactNode } from "react";
 
 interface DashboardLayoutProps {
-  children: React.ReactNode;
+  children: ReactNode;
   params: Promise<{ locale: string }>;
 }
 

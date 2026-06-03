@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 /**
  * Naql v0.1 — Full E2E Scenario
  *
@@ -17,9 +19,7 @@
  *
  * All steps are recorded as a single continuous video saved to docs/.
  */
-import { test, expect } from "@playwright/test";
-import path from "node:path";
-import fs from "node:fs";
+import { expect, test } from "@playwright/test";
 
 const DEMO_EMAIL = `e2e-${Date.now()}@naql-test.ma`;
 const DEMO_PASSWORD = "E2eTest2026!";
@@ -136,7 +136,9 @@ test.describe("Naql Full Scenario", () => {
     await page.screenshot({ path: "docs/e2e-artifacts/16-dashboard-final.png", fullPage: true });
 
     // ── 18. Sign out ──────────────────────────────────────────────────────────
-    const signOutBtn = page.locator('button:has-text("Déconnexion"), button:has-text("Sign out")').first();
+    const signOutBtn = page
+      .locator('button:has-text("Déconnexion"), button:has-text("Sign out")')
+      .first();
     if (await signOutBtn.isVisible()) {
       await signOutBtn.click();
       await page.waitForURL(/\/login/, { timeout: 10_000 });
@@ -148,21 +150,22 @@ test.describe("Naql Full Scenario", () => {
   });
 });
 
-test.afterAll(async ({}, testInfo) => {
+test.afterAll(async () => {
   // Playwright stores video at testInfo.outputPath() inside outputDir
   // We copy the latest webm to docs/naql-scenario.webm
   const artifactsDir = path.resolve("docs/e2e-artifacts");
   if (!fs.existsSync(artifactsDir)) return;
 
-  const webms = fs.readdirSync(artifactsDir, { recursive: true })
-    .map(f => String(f))
-    .filter(f => f.endsWith(".webm"))
-    .map(f => path.join(artifactsDir, f))
+  const webms = fs
+    .readdirSync(artifactsDir, { recursive: true })
+    .map((f) => String(f))
+    .filter((f) => f.endsWith(".webm"))
+    .map((f) => path.join(artifactsDir, f))
     .sort((a, b) => fs.statSync(b).mtimeMs - fs.statSync(a).mtimeMs);
 
   if (webms[0] && fs.existsSync(webms[0])) {
     const dest = path.resolve("docs/naql-scenario.webm");
     fs.copyFileSync(webms[0], dest);
-    console.log(`\n✅ Video saved → docs/naql-scenario.webm`);
+    console.log("\n✅ Video saved → docs/naql-scenario.webm");
   }
 });

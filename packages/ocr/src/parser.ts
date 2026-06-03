@@ -19,10 +19,6 @@ export const CONFIDENCE_THRESHOLD = 0.75;
 export function parseReceipt(ocrText: string, ocrConfidence: number): ParsedReceipt {
   if (!ocrText.trim()) return { confidence: 0 };
 
-  const _lines = ocrText
-    .split(/\n/)
-    .map((l) => l.trim())
-    .filter(Boolean);
   let _fieldsFound = 0;
   let fieldScore = 0;
 
@@ -118,5 +114,12 @@ export function parseReceipt(ocrText: string, ocrConfidence: number): ParsedRece
   const extractionQuality = Math.min(fieldScore / maxScore, 1);
   const confidence = ocrConfidence * extractionQuality;
 
-  return { litres, pricePerLitre, total, date, station, confidence };
+  return {
+    ...(litres !== undefined ? { litres } : {}),
+    ...(pricePerLitre !== undefined ? { pricePerLitre } : {}),
+    ...(total !== undefined ? { total } : {}),
+    ...(date !== undefined ? { date } : {}),
+    ...(station !== undefined ? { station } : {}),
+    confidence,
+  };
 }

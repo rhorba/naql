@@ -3,6 +3,7 @@ import { Link } from "@/i18n/navigation";
 import { db, withOrgContext } from "@naql/db";
 import { attendance, employees } from "@naql/db/schema";
 import { desc, eq } from "drizzle-orm";
+import { notFound } from "next/navigation";
 
 const statusConfig = {
   present: { label: "Présent", className: "bg-emerald-50 text-emerald-700 ring-emerald-200" },
@@ -12,7 +13,8 @@ const statusConfig = {
 
 export default async function AttendancePage() {
   const session = await auth();
-  const orgId = session?.user.organizationId;
+  if (!session?.user) notFound();
+  const orgId = session.user.organizationId;
 
   const [records, employeeList] = await withOrgContext(db, orgId, async (tx) => {
     const r = await tx

@@ -2,15 +2,20 @@
 
 vi.mock("drizzle-orm", () => ({ sql: vi.fn((s) => s) }));
 vi.mock("@naql/db/schema", () => ({
-  invoiceNumberSequences: { organizationId: "organization_id", year: "year", lastSequence: "last_sequence" },
+  invoiceNumberSequences: {
+    organizationId: "organization_id",
+    year: "year",
+    lastSequence: "last_sequence",
+  },
 }));
 
 import { allocateInvoiceNumber } from "../invoice-allocator";
 
 function makeDb(seq) {
-  const execute = vi.fn()
-    .mockResolvedValueOnce([])                          // advisory lock (returns row[])
-    .mockResolvedValueOnce([{ last_sequence: seq }]);   // UPDATE RETURNING (array of rows)
+  const execute = vi
+    .fn()
+    .mockResolvedValueOnce([]) // advisory lock (returns row[])
+    .mockResolvedValueOnce([{ last_sequence: seq }]); // UPDATE RETURNING (array of rows)
   const insert = vi.fn().mockReturnValue({
     values: vi.fn().mockReturnValue({ onConflictDoNothing: vi.fn().mockResolvedValue(undefined) }),
   });

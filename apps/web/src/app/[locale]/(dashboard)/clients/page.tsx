@@ -4,10 +4,12 @@ import { formatMAD } from "@naql/core";
 import type { Money } from "@naql/core";
 import { db, withOrgContext } from "@naql/db";
 import { clients } from "@naql/db/schema";
+import { notFound } from "next/navigation";
 
 export default async function ClientsPage() {
   const session = await auth();
-  const orgId = session?.user.organizationId;
+  if (!session?.user) notFound();
+  const orgId = session.user.organizationId;
 
   const clientList = await withOrgContext(db, orgId, async (tx) =>
     tx.select().from(clients).orderBy(clients.name)

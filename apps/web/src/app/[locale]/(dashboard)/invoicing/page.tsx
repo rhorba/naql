@@ -5,6 +5,7 @@ import type { Money } from "@naql/core";
 import { db, withOrgContext } from "@naql/db";
 import { clients, invoices } from "@naql/db/schema";
 import { desc, eq } from "drizzle-orm";
+import { notFound } from "next/navigation";
 
 const statusConfig = {
   draft: { label: "Brouillon", className: "bg-slate-100 text-slate-600 ring-slate-200" },
@@ -17,7 +18,8 @@ const statusConfig = {
 
 export default async function InvoicingPage() {
   const session = await auth();
-  const orgId = session?.user.organizationId;
+  if (!session?.user) notFound();
+  const orgId = session.user.organizationId;
 
   const [invoiceList, clientList] = await withOrgContext(db, orgId, async (tx) => {
     const i = await tx

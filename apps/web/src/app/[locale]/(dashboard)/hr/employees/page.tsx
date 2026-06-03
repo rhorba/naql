@@ -5,6 +5,7 @@ import type { Money } from "@naql/core";
 import { db, withOrgContext } from "@naql/db";
 import { advances, employees } from "@naql/db/schema";
 import { and, eq } from "drizzle-orm";
+import { notFound } from "next/navigation";
 
 const contractLabel: Record<string, string> = {
   cdi: "CDI",
@@ -14,8 +15,9 @@ const contractLabel: Record<string, string> = {
 
 export default async function EmployeesPage() {
   const session = await auth();
-  const orgId = session?.user.organizationId;
-  const canSeeSalary = ["owner", "accountant"].includes(session?.user.role);
+  if (!session?.user) notFound();
+  const orgId = session.user.organizationId;
+  const canSeeSalary = ["owner", "accountant"].includes(session.user.role);
 
   const [employeeList, advanceList] = await withOrgContext(db, orgId, async (tx) => {
     const e = await tx

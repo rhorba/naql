@@ -1,15 +1,24 @@
 import { routing } from "@/i18n/routing";
-import createMiddleware from "next-intl/middleware";
 import { getToken } from "next-auth/jwt";
+import createMiddleware from "next-intl/middleware";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 const intlMiddleware = createMiddleware(routing);
 
 const protectedRoutes = [
-  "/dashboard", "/fleet", "/missions", "/fuel",
-  "/invoicing", "/payments", "/cash", "/expenses",
-  "/profitability", "/hr", "/settings", "/clients",
+  "/dashboard",
+  "/fleet",
+  "/missions",
+  "/fuel",
+  "/invoicing",
+  "/payments",
+  "/cash",
+  "/expenses",
+  "/profitability",
+  "/hr",
+  "/settings",
+  "/clients",
 ];
 
 // Middleware runs on the Edge runtime — use getToken (JWT, edge-compatible)
@@ -22,7 +31,7 @@ export default async function middleware(req: NextRequest) {
   if (isProtected) {
     const token = await getToken({
       req,
-      secret: process.env.AUTH_SECRET,
+      secret: process.env.AUTH_SECRET!,
     });
     if (!token) {
       const locale = pathname.split("/")[1] ?? "fr";

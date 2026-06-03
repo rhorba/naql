@@ -9,7 +9,12 @@ vi.mock("drizzle-orm", () => ({
 }));
 
 vi.mock("@naql/db/schema", () => ({
-  alerts: { organizationId: "org_id", kind: "kind", entityId: "entity_id", resolvedAt: "resolved_at" },
+  alerts: {
+    organizationId: "org_id",
+    kind: "kind",
+    entityId: "entity_id",
+    resolvedAt: "resolved_at",
+  },
   vehicleDocuments: { id: "id", kind: "kind", expiresAt: "expires_at" },
   employees: { id: "id", fullName: "full_name", contractEndsAt: "contract_ends_at" },
   invoices: { id: "id", number: "number", dueDate: "due_date", status: "status" },

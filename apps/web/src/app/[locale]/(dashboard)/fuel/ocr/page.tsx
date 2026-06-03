@@ -2,10 +2,12 @@ import { auth } from "@/auth";
 import { OcrReceiptForm } from "@/components/fuel/ocr-receipt-form";
 import { db, withOrgContext } from "@naql/db";
 import { vehicles } from "@naql/db/schema";
+import { notFound } from "next/navigation";
 
 export default async function OcrReceiptPage() {
   const session = await auth();
-  const orgId = session?.user.organizationId;
+  if (!session?.user) notFound();
+  const orgId = session.user.organizationId;
 
   const vehicleList = await withOrgContext(db, orgId, async (tx) =>
     tx.select({ id: vehicles.id, code: vehicles.code, make: vehicles.make }).from(vehicles)

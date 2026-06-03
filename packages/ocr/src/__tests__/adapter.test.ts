@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { MockOcrAdapter, createOcrAdapter } from "../adapter";
 
 describe("MockOcrAdapter", () => {
@@ -26,14 +26,14 @@ describe("MockOcrAdapter", () => {
 });
 
 describe("createOcrAdapter", () => {
-  it("returns MockOcrAdapter when no GOOGLE_VISION_API_KEY is set", () => {
-    const originalKey = process.env.GOOGLE_VISION_API_KEY;
-    delete process.env.GOOGLE_VISION_API_KEY;
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
 
+  it("returns MockOcrAdapter when no GOOGLE_VISION_API_KEY is set", () => {
+    vi.stubEnv("GOOGLE_VISION_API_KEY", "");
     const adapter = createOcrAdapter();
     expect(adapter).toBeInstanceOf(MockOcrAdapter);
-
-    process.env.GOOGLE_VISION_API_KEY = originalKey;
   });
 
   it("returns an adapter with extract method", () => {

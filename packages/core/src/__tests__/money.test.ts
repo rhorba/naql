@@ -1,9 +1,17 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import {
-  money, add, subtract, multiply, computeVat, zero, sum,
-  formatMAD, parseMAD, fromDirhams, toDirhams,
+  add,
+  computeVat,
+  formatMAD,
+  fromDirhams,
+  money,
+  multiply,
+  parseMAD,
+  subtract,
+  sum,
+  toDirhams,
+  zero,
 } from "../money";
-import type { Money } from "../types";
 
 describe("money() constructor", () => {
   it("creates a branded Money from integer", () => {

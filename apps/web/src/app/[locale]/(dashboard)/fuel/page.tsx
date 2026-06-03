@@ -7,10 +7,12 @@ import type { AnomalyResult } from "@naql/core";
 import { db, withOrgContext } from "@naql/db";
 import { fuelLogs, vehicles } from "@naql/db/schema";
 import { desc, eq } from "drizzle-orm";
+import { notFound } from "next/navigation";
 
 export default async function FuelPage() {
   const session = await auth();
-  const orgId = session?.user.organizationId;
+  if (!session?.user) notFound();
+  const orgId = session.user.organizationId;
 
   const [fuelList, vehicleList] = await withOrgContext(db, orgId, async (tx) => {
     const f = await tx

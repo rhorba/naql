@@ -5,6 +5,7 @@ import { db } from "@naql/db";
 import { organizations, users } from "@naql/db/schema";
 import argon2 from "argon2";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 
 const signupSchema = z.object({
@@ -14,9 +15,7 @@ const signupSchema = z.object({
   password: z.string().min(8).max(100),
 });
 
-export type SignupResult = { success: true } | { success: false; error: string };
-
-export async function signup(formData: FormData): Promise<SignupResult> {
+export async function signup(formData: FormData): Promise<void> {
   const raw = {
     orgName: formData.get("orgName"),
     name: formData.get("name"),
@@ -26,11 +25,11 @@ export async function signup(formData: FormData): Promise<SignupResult> {
 
   const parsed = signupSchema.safeParse(raw);
   if (!parsed.success) {
-    return { success: false, error: parsed.error.errors[0]?.message ?? "Invalid input" };
+    const msg = encodeURIComponent(parsed.error.errors[0]?.message ?? "Invalid input");
+    redirect(`/fr/signup?error=${msg}`);
   }
 
   const { orgName, name, email, password } = parsed.data;
-
   const passwordHash = await argon2.hash(password, { type: argon2.argon2id });
 
   try {
@@ -53,14 +52,11 @@ export async function signup(formData: FormData): Promise<SignupResult> {
     });
 
     await signIn("credentials", { email, password, redirectTo: "/fr/dashboard" });
-
-    return { success: true };
   } catch (err) {
     if (isRedirectError(err)) throw err;
     const message = err instanceof Error ? err.message : "Unknown error";
-    if (message.includes("unique") || message.includes("duplicate")) {
-      return { success: false, error: "Email already registered" };
-    }
-    return { success: false, error: "Failed to create account" };
+    const errorKey =
+      message.includes("unique") || message.includes("duplicate") ? "email_taken" : "failed";
+    redirect(`/fr/signup?error=${errorKey}`);
   }
 }

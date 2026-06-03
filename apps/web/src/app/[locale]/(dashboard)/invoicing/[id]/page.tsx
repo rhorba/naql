@@ -24,7 +24,8 @@ interface Props {
 export default async function InvoiceDetailPage({ params }: Props) {
   const { id, locale } = await params;
   const session = await auth();
-  const orgId = session?.user.organizationId;
+  if (!session?.user) notFound();
+  const orgId = session.user.organizationId;
 
   const [invoice, client, org] = await withOrgContext(db, orgId, async (tx) => {
     const [inv] = await tx

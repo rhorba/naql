@@ -6,10 +6,12 @@ import { withOrgContext } from "@naql/db";
 import { alerts, vehicles } from "@naql/db/schema";
 import type { VehicleRow } from "@naql/db/schema";
 import { and, eq, isNull } from "drizzle-orm";
+import { notFound } from "next/navigation";
 
 export default async function FleetPage() {
   const session = await auth();
-  const orgId = session?.user.organizationId;
+  if (!session?.user) notFound();
+  const orgId = session.user.organizationId;
 
   const [vehicleList, alertList] = await withOrgContext(db, orgId, async (tenantDb) => {
     const v = await tenantDb.select().from(vehicles).orderBy(vehicles.code);

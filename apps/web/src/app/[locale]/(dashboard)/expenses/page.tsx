@@ -5,6 +5,7 @@ import type { Money } from "@naql/core";
 import { db, withOrgContext } from "@naql/db";
 import { expenses } from "@naql/db/schema";
 import { desc, eq } from "drizzle-orm";
+import { notFound } from "next/navigation";
 
 const categoryLabel: Record<string, string> = {
   fuel: "Gasoil",
@@ -17,7 +18,8 @@ const categoryLabel: Record<string, string> = {
 
 export default async function ExpensesPage() {
   const session = await auth();
-  const orgId = session?.user.organizationId;
+  if (!session?.user) notFound();
+  const orgId = session.user.organizationId;
 
   const list = await withOrgContext(db, orgId, async (tx) =>
     tx

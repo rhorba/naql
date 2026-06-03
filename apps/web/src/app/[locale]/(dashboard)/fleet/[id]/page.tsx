@@ -28,7 +28,8 @@ interface PageProps {
 export default async function VehicleDetailPage({ params }: PageProps) {
   const { id } = await params;
   const session = await auth();
-  const orgId = session?.user.organizationId;
+  if (!session?.user) notFound();
+  const orgId = session.user.organizationId;
 
   const [vehicle, docs, docAlerts] = await withOrgContext(db, orgId, async (tenantDb) => {
     const [v] = await tenantDb

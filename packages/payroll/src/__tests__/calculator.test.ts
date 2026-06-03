@@ -1,6 +1,6 @@
-import { describe, it, expect } from "vitest";
-import { computePayroll } from "../calculator";
 import type { Money } from "@naql/core";
+import { describe, expect, it } from "vitest";
+import { computePayroll } from "../calculator";
 
 describe("computePayroll (legacy calculator)", () => {
   it("returns integer centimes", () => {

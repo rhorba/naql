@@ -5,11 +5,13 @@ import { withOrgContext } from "@naql/db";
 import { alerts, invoices, missions, vehicles } from "@naql/db/schema";
 import type { AlertRow } from "@naql/db/schema";
 import { and, count, eq, isNull, sql } from "drizzle-orm";
+import { notFound } from "next/navigation";
 
 export default async function DashboardPage() {
   const session = await auth();
-  const orgId = session?.user.organizationId;
-  const name = session?.user.name;
+  if (!session?.user) notFound();
+  const orgId = session.user.organizationId;
+  const name = session.user.name;
 
   const [vehicleCount, activeMissions, overdueInvoices, activeAlerts] = await withOrgContext(
     db,

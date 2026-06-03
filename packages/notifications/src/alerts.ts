@@ -12,8 +12,3 @@ export interface Alert {
   severity: "info" | "warning" | "critical";
   at: Date;
 }
-
-/** Stub — real sweep registered as pg-boss job in Sprint 3 */
-export async function runAlertSweep(_organizationId: string): Promise<Alert[]> {
-  return [];
-}

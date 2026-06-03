@@ -4,10 +4,12 @@ import type { Money } from "@naql/core";
 import { db, withOrgContext } from "@naql/db";
 import { expenses, payments } from "@naql/db/schema";
 import { and, desc, eq, sql } from "drizzle-orm";
+import { notFound } from "next/navigation";
 
 export default async function CashPage() {
   const session = await auth();
-  const orgId = session?.user.organizationId;
+  if (!session?.user) notFound();
+  const orgId = session.user.organizationId;
 
   const [cashIn, cashOut] = await withOrgContext(db, orgId, async (tx) => {
     const inc = await tx

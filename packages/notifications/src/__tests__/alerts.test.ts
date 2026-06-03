@@ -1,15 +1,27 @@
-import { describe, it, expect } from "vitest";
-import { runAlertSweep } from "../alerts";
+import { describe, expect, it } from "vitest";
+import type { Alert, AlertKind } from "../alerts";
 
-describe("runAlertSweep stub", () => {
-  it("returns empty array (no-op stub)", async () => {
-    const result = await runAlertSweep("org-123");
-    expect(Array.isArray(result)).toBe(true);
-    expect(result).toHaveLength(0);
+describe("AlertKind type", () => {
+  it("accepts valid alert kinds", () => {
+    const kinds: AlertKind[] = [
+      "document_expiry",
+      "contract_renewal",
+      "invoice_overdue",
+      "over_consumption",
+    ];
+    expect(kinds).toHaveLength(4);
   });
 
-  it("accepts any organizationId", async () => {
-    const result = await runAlertSweep("any-org-id");
-    expect(result).toHaveLength(0);
+  it("Alert interface has required fields", () => {
+    const alert: Alert = {
+      kind: "document_expiry",
+      organizationId: "org-1",
+      entityId: "doc-1",
+      message: "Insurance expires soon",
+      severity: "warning",
+      at: new Date(),
+    };
+    expect(alert.kind).toBe("document_expiry");
+    expect(alert.severity).toBe("warning");
   });
 });

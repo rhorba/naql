@@ -1,6 +1,6 @@
-import { describe, it, expect } from "vitest";
-import { generateInvoiceHtml } from "../invoice-pdf";
 import type { Money } from "@naql/core";
+import { describe, expect, it } from "vitest";
+import { generateInvoiceHtml } from "../invoice-pdf";
 
 const BASE: Parameters<typeof generateInvoiceHtml>[0] = {
   locale: "fr",
@@ -117,8 +117,18 @@ describe("generateInvoiceHtml — edge cases", () => {
     const html = generateInvoiceHtml({
       ...BASE,
       lines: [
-        { description: "Trip A", quantity: 2, unitPrice: 300_000 as Money, amount: 600_000 as Money },
-        { description: "Trip B", quantity: 1, unitPrice: 200_000 as Money, amount: 200_000 as Money },
+        {
+          description: "Trip A",
+          quantity: 2,
+          unitPrice: 300_000 as Money,
+          amount: 600_000 as Money,
+        },
+        {
+          description: "Trip B",
+          quantity: 1,
+          unitPrice: 200_000 as Money,
+          amount: 200_000 as Money,
+        },
       ],
     });
     expect(html).toContain("Trip A");

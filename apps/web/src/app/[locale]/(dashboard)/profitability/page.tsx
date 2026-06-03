@@ -1,14 +1,16 @@
 import { auth } from "@/auth";
 import { computeProfitability } from "@naql/billing";
-import { formatMAD, zero } from "@naql/core";
+import { formatMAD } from "@naql/core";
 import type { Money } from "@naql/core";
 import { db, withOrgContext } from "@naql/db";
 import { clients, expenses, fuelLogs, invoices, missions, vehicles } from "@naql/db/schema";
 import { and, eq, sql } from "drizzle-orm";
+import { notFound } from "next/navigation";
 
 export default async function ProfitabilityPage() {
   const session = await auth();
-  const orgId = session?.user.organizationId;
+  if (!session?.user) notFound();
+  const orgId = session.user.organizationId;
 
   const data = await withOrgContext(db, orgId, async (tx) => {
     // Revenue: sum of paid + partial invoice totals
@@ -96,14 +98,6 @@ export default async function ProfitabilityPage() {
       .select({ id: clients.id, name: clients.name })
       .from(clients)
       .where(eq(clients.organizationId, orgId));
-    const _clientMargins = clientList.map((c) => {
-      const _cMissions = missionList.filter((_m) => {
-        // re-join missions by clientId — simplified fetch
-        return false; // placeholder: real join below
-      });
-      return { name: c.name, revenue: zero() as Money };
-    });
-
     const missionsFull = await tx
       .select({ clientId: missions.clientId, agreedPrice: missions.agreedPrice })
       .from(missions)

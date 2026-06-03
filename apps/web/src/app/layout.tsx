@@ -1,4 +1,5 @@
-// Root layout — no HTML; locale layout provides html+body
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+import type { ReactNode } from "react";
+
+export default function RootLayout({ children }: { children: ReactNode }) {
   return children;
 }

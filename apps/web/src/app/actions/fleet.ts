@@ -44,17 +44,18 @@ export const createVehicle = withTenant(
       .values({ ...data, organizationId: orgId })
       .returning();
 
+    if (!vehicle) throw new Error("Insert failed");
+
     await db.insert(auditLogs).values({
       organizationId: orgId,
       actorUserId: userId,
       entity: "vehicles",
-      entityId: vehicle?.id,
+      entityId: vehicle.id,
       action: "create",
       after: vehicle,
     });
 
     revalidatePath("/fleet");
-    if (!vehicle) throw new Error("Insert failed");
     return vehicle;
   }
 );
@@ -148,17 +149,18 @@ export const createDocument = withTenant(
       })
       .returning();
 
+    if (!doc) throw new Error("Insert failed");
+
     await db.insert(auditLogs).values({
       organizationId: orgId,
       actorUserId: userId,
       entity: "vehicle_documents",
-      entityId: doc?.id,
+      entityId: doc.id,
       action: "create",
       after: doc,
     });
 
     revalidatePath("/fleet");
-    if (!doc) throw new Error("Insert failed");
     return doc;
   }
 );

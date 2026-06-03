@@ -3,10 +3,12 @@ import { MissionBoard } from "@/components/missions/mission-board";
 import { Link } from "@/i18n/navigation";
 import { db, withOrgContext } from "@naql/db";
 import { clients, missions, vehicles } from "@naql/db/schema";
+import { notFound } from "next/navigation";
 
 export default async function MissionsPage() {
   const session = await auth();
-  const orgId = session?.user.organizationId;
+  if (!session?.user) notFound();
+  const orgId = session.user.organizationId;
 
   const [missionList, vehicleList, clientList] = await withOrgContext(db, orgId, async (tx) => {
     const m = await tx

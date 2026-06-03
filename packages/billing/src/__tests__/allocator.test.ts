@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import { formatInvoiceNumber } from "../invoice-number";
 
 // allocateInvoiceNumber requires a live DB with advisory locking.
