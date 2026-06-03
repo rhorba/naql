@@ -18,7 +18,7 @@
     "db:push": "pnpm --filter @naql/db db:push",
     "db:studio": "pnpm --filter @naql/db db:studio",
     "db:seed": "pnpm --filter @naql/db db:seed",
-    "type-check": "tsc --build --noEmit"
+    "type-check": "tsc --build --noEmit && tsc -p apps/web/tsconfig.json --noEmit"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",

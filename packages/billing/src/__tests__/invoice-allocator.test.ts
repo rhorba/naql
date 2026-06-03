@@ -1,4 +1,5 @@
-﻿import { describe, expect, it, vi } from "vitest";
+﻿import type { Database } from "@naql/db";
+import { describe, expect, it, vi } from "vitest";
 
 vi.mock("drizzle-orm", () => ({ sql: vi.fn((s) => s) }));
 vi.mock("@naql/db/schema", () => ({
@@ -11,7 +12,7 @@ vi.mock("@naql/db/schema", () => ({
 
 import { allocateInvoiceNumber } from "../invoice-allocator";
 
-function makeDb(seq) {
+function makeDb(seq: string | number) {
   const execute = vi
     .fn()
     .mockResolvedValueOnce([]) // advisory lock (returns row[])
@@ -20,9 +21,9 @@ function makeDb(seq) {
     values: vi.fn().mockReturnValue({ onConflictDoNothing: vi.fn().mockResolvedValue(undefined) }),
   });
   return {
-    transaction: vi.fn(async (fn) => fn({ execute, insert })),
+    transaction: vi.fn(async (fn: (tx: unknown) => Promise<string>) => fn({ execute, insert })),
     _execute: execute,
-  };
+  } as unknown as Database & { _execute: typeof execute };
 }
 
 describe("allocateInvoiceNumber", () => {
@@ -47,13 +48,13 @@ describe("allocateInvoiceNumber", () => {
   it("first execute call contains pg_advisory_xact_lock", async () => {
     const db = makeDb("5");
     await allocateInvoiceNumber(db, "org-1", 2026);
-    expect(String(db._execute.mock.calls[0][0])).toContain("pg_advisory_xact_lock");
+    expect(String(db._execute.mock.calls[0]![0])).toContain("pg_advisory_xact_lock");
   });
 
   it("second execute call contains UPDATE", async () => {
     const db = makeDb("3");
     await allocateInvoiceNumber(db, "org-1", 2026);
-    expect(String(db._execute.mock.calls[1][0])).toContain("last_sequence");
+    expect(String(db._execute.mock.calls[1]![0])).toContain("last_sequence");
   });
 
   it("different years produce different prefixes", async () => {

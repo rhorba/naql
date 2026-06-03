@@ -37,7 +37,7 @@ describe("withTenant wrapper", () => {
   });
 
   it("throws AuthError when no session", async () => {
-    mockAuth.mockResolvedValueOnce(null);
+    mockAuth.mockResolvedValueOnce(null as never);
     const action = withTenant(null, async () => "ok");
     await expect(action({})).rejects.toThrow(AuthError);
   });
@@ -61,15 +61,19 @@ describe("withTenant wrapper", () => {
 
   it("passes orgId, role, userId to handler", async () => {
     mockAuth.mockResolvedValueOnce(OWNER_SESSION as never);
-    let captured: { orgId: string; role: string; userId: string } | null = null;
+    let capturedOrgId = "";
+    let capturedRole = "";
+    let capturedUserId = "";
     const action = withTenant(null, async (ctx) => {
-      captured = ctx;
+      capturedOrgId = ctx.orgId;
+      capturedRole = ctx.role;
+      capturedUserId = ctx.userId;
       return "done";
     });
     await action({});
-    expect(captured?.orgId).toBe("org-1");
-    expect(captured?.role).toBe("owner");
-    expect(captured?.userId).toBe("user-1");
+    expect(capturedOrgId).toBe("org-1");
+    expect(capturedRole).toBe("owner");
+    expect(capturedUserId).toBe("user-1");
   });
 
   it("throws ForbiddenError when role lacks capability", async () => {

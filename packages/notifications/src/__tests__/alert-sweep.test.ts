@@ -1,4 +1,5 @@
-﻿import { describe, expect, it, vi } from "vitest";
+﻿import type { Database } from "@naql/db";
+import { describe, expect, it, vi } from "vitest";
 
 // Mock drizzle-orm before importing module under test
 vi.mock("drizzle-orm", () => ({
@@ -25,7 +26,7 @@ import { runAlertSweep } from "../alert-sweep";
 const FUTURE = new Date(Date.now() + 5 * 864e5);
 const PAST = new Date(Date.now() - 2 * 864e5);
 
-function makeDb(docs = [], contracts = [], invoiceRows = []) {
+function makeDb(docs: unknown[] = [], contracts: unknown[] = [], invoiceRows: unknown[] = []) {
   let n = 0;
   const rows = [docs, contracts, invoiceRows];
   return {
@@ -35,7 +36,7 @@ function makeDb(docs = [], contracts = [], invoiceRows = []) {
     })),
     insert: vi.fn().mockReturnValue({ values: vi.fn().mockResolvedValue(undefined) }),
     delete: vi.fn().mockReturnValue({ where: vi.fn().mockResolvedValue(undefined) }),
-  };
+  } as unknown as Database;
 }
 
 describe("runAlertSweep", () => {

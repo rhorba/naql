@@ -17,5 +17,6 @@
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true
-  }
+  },
+  "exclude": ["apps/web", "apps/mobile", "node_modules", "**/dist", "**/node_modules"]
 }

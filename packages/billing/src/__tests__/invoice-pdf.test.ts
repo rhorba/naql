@@ -99,7 +99,8 @@ describe("generateInvoiceHtml — AR (RTL)", () => {
 
 describe("generateInvoiceHtml — edge cases", () => {
   it("works without optional dueDate", () => {
-    const html = generateInvoiceHtml({ ...BASE, dueDate: undefined });
+    const { dueDate: _omit, ...baseNoDueDate } = BASE;
+    const html = generateInvoiceHtml(baseNoDueDate);
     expect(html).toContain("<!DOCTYPE html>");
   });
 

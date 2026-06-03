@@ -1,4 +1,5 @@
 ﻿import type { Role } from "./types";
+export type { Role };
 
 // Every capability string in the system. Format: "resource:action"
 export type Capability =

@@ -48,7 +48,7 @@ async function seed() {
     })
     .returning();
 
-  const orgId = org?.id;
+  const orgId = org!.id;
   console.log(`✓ Org: ${orgId}`);
 
   // ── Users (5) ─────────────────────────────────────────────────────────────
@@ -176,7 +176,7 @@ async function seed() {
   await db.insert(schema.vehicleDocuments).values([
     {
       organizationId: orgId,
-      vehicleId: v1?.id,
+      vehicleId: v1!.id,
       kind: "insurance",
       reference: "ASS-2024-50387",
       issuedAt: past,
@@ -184,7 +184,7 @@ async function seed() {
     },
     {
       organizationId: orgId,
-      vehicleId: v1?.id,
+      vehicleId: v1!.id,
       kind: "technical_inspection",
       reference: "VT-2024-50387",
       issuedAt: past,
@@ -193,7 +193,7 @@ async function seed() {
     // V2: both docs OK
     {
       organizationId: orgId,
-      vehicleId: v2?.id,
+      vehicleId: v2!.id,
       kind: "insurance",
       reference: "ASS-2024-73472",
       issuedAt: past,
@@ -201,7 +201,7 @@ async function seed() {
     },
     {
       organizationId: orgId,
-      vehicleId: v2?.id,
+      vehicleId: v2!.id,
       kind: "technical_inspection",
       reference: "VT-2024-73472",
       issuedAt: past,
@@ -210,7 +210,7 @@ async function seed() {
     // V3: visite expirée → critical alert
     {
       organizationId: orgId,
-      vehicleId: v3?.id,
+      vehicleId: v3!.id,
       kind: "insurance",
       reference: "ASS-2024-92272",
       issuedAt: past,
@@ -218,7 +218,7 @@ async function seed() {
     },
     {
       organizationId: orgId,
-      vehicleId: v3?.id,
+      vehicleId: v3!.id,
       kind: "technical_inspection",
       reference: "VT-2023-92272",
       issuedAt: new Date(past.getTime() - 365 * 24 * 60 * 60 * 1000),
@@ -282,9 +282,9 @@ async function seed() {
     .insert(schema.missions)
     .values({
       organizationId: orgId,
-      clientId: clientA?.id,
-      vehicleId: v1?.id,
-      driverId: userBrahim?.id,
+      clientId: clientA!.id,
+      vehicleId: v1!.id,
+      driverId: userBrahim!.id,
       originCity: "Casablanca",
       destinationCity: "Marrakech",
       cargo: "Clinker",
@@ -299,9 +299,9 @@ async function seed() {
     .insert(schema.missions)
     .values({
       organizationId: orgId,
-      clientId: clientB?.id,
-      vehicleId: v2?.id,
-      driverId: userKarim?.id,
+      clientId: clientB!.id,
+      vehicleId: v2!.id,
+      driverId: userKarim!.id,
       originCity: "Casablanca",
       destinationCity: "Rabat",
       cargo: "Sucre",
@@ -314,9 +314,9 @@ async function seed() {
   await db.insert(schema.missions).values([
     {
       organizationId: orgId,
-      clientId: clientC?.id,
-      vehicleId: v1?.id,
-      driverId: userBrahim?.id,
+      clientId: clientC!.id,
+      vehicleId: v1!.id,
+      driverId: userBrahim!.id,
       originCity: "Jorf Lasfar",
       destinationCity: "Safi",
       cargo: "Phosphate",
@@ -327,8 +327,8 @@ async function seed() {
     },
     {
       organizationId: orgId,
-      clientId: clientD?.id,
-      vehicleId: v3?.id,
+      clientId: clientD!.id,
+      vehicleId: v3!.id,
       originCity: "Tanger",
       destinationCity: "Fès",
       cargo: "Matériaux de construction",
@@ -338,9 +338,9 @@ async function seed() {
     },
     {
       organizationId: orgId,
-      clientId: clientA?.id,
-      vehicleId: v2?.id,
-      driverId: userKarim?.id,
+      clientId: clientA!.id,
+      vehicleId: v2!.id,
+      driverId: userKarim!.id,
       originCity: "Casablanca",
       destinationCity: "Agadir",
       cargo: "Ciment",
@@ -351,9 +351,9 @@ async function seed() {
     },
     {
       organizationId: orgId,
-      clientId: clientB?.id,
-      vehicleId: v1?.id,
-      driverId: userBrahim?.id,
+      clientId: clientB!.id,
+      vehicleId: v1!.id,
+      driverId: userBrahim!.id,
       originCity: "Kénitra",
       destinationCity: "Oujda",
       cargo: "Sucre raffiné",
@@ -363,8 +363,8 @@ async function seed() {
     },
     {
       organizationId: orgId,
-      clientId: clientC?.id,
-      vehicleId: v3?.id,
+      clientId: clientC!.id,
+      vehicleId: v3!.id,
       originCity: "Laâyoune",
       destinationCity: "Dakhla",
       cargo: "Phosphate transformé",
@@ -375,9 +375,9 @@ async function seed() {
     },
     {
       organizationId: orgId,
-      clientId: clientD?.id,
-      vehicleId: v2?.id,
-      driverId: userKarim?.id,
+      clientId: clientD!.id,
+      vehicleId: v2!.id,
+      driverId: userKarim!.id,
       originCity: "Casablanca",
       destinationCity: "Meknès",
       cargo: "Équipements BTP",
@@ -394,25 +394,25 @@ async function seed() {
   const fuelLogs = [
     // V1 normal trips
     {
-      vehicleId: v1?.id,
-      driverId: userBrahim?.id,
-      missionId: m1?.id,
+      vehicleId: v1!.id,
+      driverId: userBrahim!.id,
+      missionId: m1!.id,
       litres: 85,
       pplCentimes: 1280,
       odo: 1450,
       daysAgo: 10,
     },
     {
-      vehicleId: v1?.id,
-      driverId: userBrahim?.id,
-      missionId: m1?.id,
+      vehicleId: v1!.id,
+      driverId: userBrahim!.id,
+      missionId: m1!.id,
       litres: 92,
       pplCentimes: 1280,
       odo: 1550,
       daysAgo: 9,
     },
     {
-      vehicleId: v1?.id,
+      vehicleId: v1!.id,
       driverId: null,
       missionId: null,
       litres: 60,
@@ -421,7 +421,7 @@ async function seed() {
       daysAgo: 6,
     },
     {
-      vehicleId: v1?.id,
+      vehicleId: v1!.id,
       driverId: null,
       missionId: null,
       litres: 78,
@@ -431,25 +431,25 @@ async function seed() {
     },
     // V2 — one OVER-CONSUMPTION entry (130L for a ~200km trip = 65 L/100km vs baseline 22)
     {
-      vehicleId: v2?.id,
-      driverId: userKarim?.id,
-      missionId: m2?.id,
+      vehicleId: v2!.id,
+      driverId: userKarim!.id,
+      missionId: m2!.id,
       litres: 130,
       pplCentimes: 1285,
       odo: 750,
       daysAgo: 1,
     }, // ← anomaly
     {
-      vehicleId: v2?.id,
-      driverId: userKarim?.id,
-      missionId: m2?.id,
+      vehicleId: v2!.id,
+      driverId: userKarim!.id,
+      missionId: m2!.id,
       litres: 48,
       pplCentimes: 1285,
       odo: 800,
       daysAgo: 0,
     },
     {
-      vehicleId: v2?.id,
+      vehicleId: v2!.id,
       driverId: null,
       missionId: null,
       litres: 55,
@@ -458,7 +458,7 @@ async function seed() {
       daysAgo: 5,
     },
     {
-      vehicleId: v2?.id,
+      vehicleId: v2!.id,
       driverId: null,
       missionId: null,
       litres: 62,
@@ -467,7 +467,7 @@ async function seed() {
       daysAgo: 12,
     },
     {
-      vehicleId: v2?.id,
+      vehicleId: v2!.id,
       driverId: null,
       missionId: null,
       litres: 58,
@@ -477,7 +477,7 @@ async function seed() {
     },
     // V3
     {
-      vehicleId: v3?.id,
+      vehicleId: v3!.id,
       driverId: null,
       missionId: null,
       litres: 38,
@@ -486,7 +486,7 @@ async function seed() {
       daysAgo: 4,
     },
     {
-      vehicleId: v3?.id,
+      vehicleId: v3!.id,
       driverId: null,
       missionId: null,
       litres: 42,
@@ -495,7 +495,7 @@ async function seed() {
       daysAgo: 8,
     },
     {
-      vehicleId: v3?.id,
+      vehicleId: v3!.id,
       driverId: null,
       missionId: null,
       litres: 36,
@@ -505,7 +505,7 @@ async function seed() {
     },
     // More V1
     {
-      vehicleId: v1?.id,
+      vehicleId: v1!.id,
       driverId: null,
       missionId: null,
       litres: 88,
@@ -514,7 +514,7 @@ async function seed() {
       daysAgo: 20,
     },
     {
-      vehicleId: v1?.id,
+      vehicleId: v1!.id,
       driverId: null,
       missionId: null,
       litres: 74,
@@ -523,7 +523,7 @@ async function seed() {
       daysAgo: 25,
     },
     {
-      vehicleId: v1?.id,
+      vehicleId: v1!.id,
       driverId: null,
       missionId: null,
       litres: 91,
@@ -533,7 +533,7 @@ async function seed() {
     },
     // More V2
     {
-      vehicleId: v2?.id,
+      vehicleId: v2!.id,
       driverId: null,
       missionId: null,
       litres: 51,
@@ -542,7 +542,7 @@ async function seed() {
       daysAgo: 22,
     },
     {
-      vehicleId: v2?.id,
+      vehicleId: v2!.id,
       driverId: null,
       missionId: null,
       litres: 47,
@@ -551,7 +551,7 @@ async function seed() {
       daysAgo: 28,
     },
     {
-      vehicleId: v2?.id,
+      vehicleId: v2!.id,
       driverId: null,
       missionId: null,
       litres: 64,
@@ -561,7 +561,7 @@ async function seed() {
     },
     // More V3
     {
-      vehicleId: v3?.id,
+      vehicleId: v3!.id,
       driverId: null,
       missionId: null,
       litres: 40,
@@ -570,7 +570,7 @@ async function seed() {
       daysAgo: 38,
     },
     {
-      vehicleId: v3?.id,
+      vehicleId: v3!.id,
       driverId: null,
       missionId: null,
       litres: 35,
@@ -612,7 +612,7 @@ async function seed() {
   await db.insert(schema.invoices).values([
     {
       organizationId: orgId,
-      clientId: clientA?.id,
+      clientId: clientA!.id,
       number: "INV-2026-0001",
       issueDate: issued30,
       dueDate: due15ago, // OVERDUE
@@ -632,7 +632,7 @@ async function seed() {
     },
     {
       organizationId: orgId,
-      clientId: clientC?.id,
+      clientId: clientC!.id,
       number: "INV-2026-0002",
       issueDate: issued30,
       dueDate: due60,
@@ -652,7 +652,7 @@ async function seed() {
     },
     {
       organizationId: orgId,
-      clientId: clientB?.id,
+      clientId: clientB!.id,
       number: "INV-2026-0003",
       issueDate: issued10,
       dueDate: due30,
@@ -681,7 +681,7 @@ async function seed() {
   await db.insert(schema.employees).values([
     {
       organizationId: orgId,
-      userId: userBrahim?.id,
+      userId: userBrahim!.id,
       fullName: "Brahim Ouali",
       role: "Chauffeur",
       baseSalary: 450000, // 4,500 MAD
@@ -690,7 +690,7 @@ async function seed() {
     },
     {
       organizationId: orgId,
-      userId: userKarim?.id,
+      userId: userKarim!.id,
       fullName: "Karim Alaoui",
       role: "Chauffeur",
       baseSalary: 380000, // 3,800 MAD
