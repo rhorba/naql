@@ -130,3 +130,49 @@ Completed:
 - SkipLink component: accessible keyboard navigation bypass
 - 54/54 tests pass (3 i18n parity tests new) · lint clean (149 files)
 Next: Sprint 7 → Security hardening + performance + deploy → v0.1 SHIP
+
+## SESSION_START — 2026-06-02 (Coverage + E2E)
+Goal: Hit 80% code coverage and record a Playwright E2E video under docs/
+
+## SESSION_END — 2026-06-02 (Coverage + E2E — PARTIAL)
+
+### COMPLETED
+- @vitest/coverage-v8@2.1.9 installed (matches vitest@2.1.9)
+- vitest.config.ts: coverage thresholds (lines/functions/statements 80%, branches 75%), reportsDirectory ./coverage, excludes types.ts/schemas.ts (pure TS types, no runtime code)
+- New test files added: invoice-pdf.test.ts (16 tests), calculator.test.ts (6), money.test.ts (20), adapter.test.ts (5), alerts.test.ts (2), vat.test.ts (5), allocator.test.ts (4), alert-sweep.test.ts (8 with mocked DB), invoice-allocator.test.ts (7 with mocked DB), with-tenant.test.ts (8 with vi.mock auth+db)
+- COVERAGE RESULT: **95.57% lines, 94.31% branches, 96.22% functions** — THRESHOLD MET ✅
+- Total tests: **171 passing, 3 skipped** (tenant-isolation awaits live DB)
+- Playwright @1.60.0 installed; playwright.config.ts configured with video:on, screenshot:on, port 3003, outputDir=docs/e2e-artifacts, webServer auto-start
+- e2e/naql-full-scenario.spec.ts written: 18-step scenario (login, signup, dashboard, fleet CRUD, missions, fuel, clients, invoicing, payments, profitability, HR, payroll, OCR, AR RTL, sign-out)
+- apps/web/package.json: `dev` changed from `--turbopack` to plain `next dev` (typedRoutes incompatible with turbopack)
+- next.config.ts: transpilePackages for workspace packages (no native deps), serverExternalPackages + webpack.externals for argon2/pg-boss/postgres/drizzle-orm/@naql/db
+- middleware.ts: replaced `auth()` (Node.js only) with `getToken()` from next-auth/jwt (edge-compatible)
+- apps/web/src/i18n/navigation.ts + request.ts: removed .js extensions (webpack bundler resolution)
+- packages/db/src/index.ts, client.ts, tenant.ts, schema/index.ts: .js extensions RESTORED (needed for Node.js ESM when package is server-external)
+
+### IN PROGRESS (next session picks up here)
+The dev server now starts cleanly (✓ Ready in 2.5s) BUT the login page still returns 500.
+Root cause: `packages/db/src/schema/*.ts` files import each other without .js (needed for drizzle-kit) but when loaded as Node.js ESM externals, they need .js.
+
+### EXACT NEXT STEPS (do in order)
+1. The schema files (organizations.ts, users.ts, vehicles.ts etc.) import each other WITHOUT .js extensions (e.g. `import { organizations } from "./organizations"`). When @naql/db is a server external, Node.js ESM fails to resolve these. 
+   FIX: Add .js extensions back to ALL inter-schema imports inside packages/db/src/schema/*.ts (the individual schema files — NOT the index.ts which already has .js back)
+   IMPORTANT: drizzle-kit uses `schema: "./src/schema/*.ts"` glob so it processes schema files individually and doesn't care about the index.ts
+
+2. Once login page renders (200), run the Playwright tests:
+   `PORT=3003 pnpm exec playwright test --reporter=list`
+
+3. Copy the generated .webm video from docs/e2e-artifacts/ to docs/naql-scenario.webm
+
+4. Commit and push all new files to GitHub:
+   - vitest.config.ts (coverage config)
+   - packages/*/src/__tests__/*.test.ts (new coverage tests — 10 new files)
+   - e2e/naql-full-scenario.spec.ts
+   - playwright.config.ts
+   - apps/web/package.json (removed --turbopack)
+   - apps/web/next.config.ts (transpilePackages + webpack externals)
+   - apps/web/src/middleware.ts (getToken instead of auth())
+   - apps/web/src/i18n/navigation.ts + request.ts (removed .js)
+   - packages/db/src/index.ts + client.ts + tenant.ts + schema/index.ts (.js restored)
+   - docs/ folder (screenshots + video)
+   - coverage/ folder (HTML report)

@@ -31,6 +31,10 @@ drizzle/
 
 # Testing
 coverage/
+playwright-report/
+# E2E artifacts — keep screenshots + naql-scenario.webm, skip large trace/raw video
+docs/e2e-artifacts/*/trace.zip
+docs/e2e-artifacts/*/video.webm
 
 # Misc
 .DS_Store

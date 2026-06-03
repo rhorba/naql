@@ -1,3 +1,3 @@
-﻿export * from "./client";
-export * from "./schema/index";
-export * from "./tenant";
+export * from "./client.js";
+export * from "./schema/index.js";
+export * from "./tenant.js";

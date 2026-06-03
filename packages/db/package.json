@@ -14,7 +14,7 @@
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "db:seed": "tsx src/seed/index.ts",
+    "db:seed": "node --env-file .env --import tsx/esm src/seed/index.ts",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {

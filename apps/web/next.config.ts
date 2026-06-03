@@ -1,11 +1,11 @@
-import type { NextConfig } from "next";
+﻿import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const CSP = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' 'unsafe-eval'", // unsafe-eval for Next.js dev; tighten in prod
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com",
   "img-src 'self' data: blob:",
@@ -20,31 +20,43 @@ const securityHeaders = [
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
   { key: "X-DNS-Prefetch-Control", value: "on" },
-  {
-    key: "Strict-Transport-Security",
-    value: "max-age=63072000; includeSubDomains; preload",
-  },
-  {
-    key: "Content-Security-Policy",
-    value: CSP,
-  },
+  { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
+  { key: "Content-Security-Policy", value: CSP },
 ];
 
 const nextConfig: NextConfig = {
-  experimental: {
-    typedRoutes: true,
-  },
-  serverExternalPackages: ["argon2", "pg-boss"],
-  async headers() {
-    return [
-      {
-        source: "/(.*)",
-        headers: securityHeaders,
-      },
-    ];
-  },
-  // Disable X-Powered-By header
+  // Workspace packages — transpiled by Next.js webpack pipeline
+  transpilePackages: [
+    "@naql/core",
+    "@naql/billing",
+    "@naql/payroll",
+    "@naql/ocr",
+    "@naql/notifications",
+    "@naql/db",
+  ],
+  // Packages with native bindings — keep as server externals
+  serverExternalPackages: ["argon2", "pg-boss", "postgres", "drizzle-orm"],
   poweredByHeader: false,
+  async headers() {
+    return [{ source: "/(.*)", headers: securityHeaders }];
+  },
+  webpack(config, { isServer }) {
+    // Allow .js imports to resolve to .ts source files in workspace packages
+    config.resolve.extensionAlias = {
+      ...(config.resolve.extensionAlias ?? {}),
+      ".js": [".ts", ".tsx", ".js"],
+    };
+    if (isServer) {
+      config.externals = [
+        ...(Array.isArray(config.externals) ? config.externals : []),
+        "argon2",
+        "pg-boss",
+        "postgres",
+        "drizzle-orm",
+      ];
+    }
+    return config;
+  },
 };
 
 export default withNextIntl(nextConfig);

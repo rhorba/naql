@@ -4,6 +4,7 @@ import { signIn } from "@/auth";
 import { db } from "@naql/db";
 import { organizations, users } from "@naql/db/schema";
 import argon2 from "argon2";
+import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { z } from "zod";
 
 const signupSchema = z.object({
@@ -55,6 +56,7 @@ export async function signup(formData: FormData): Promise<SignupResult> {
 
     return { success: true };
   } catch (err) {
+    if (isRedirectError(err)) throw err;
     const message = err instanceof Error ? err.message : "Unknown error";
     if (message.includes("unique") || message.includes("duplicate")) {
       return { success: false, error: "Email already registered" };

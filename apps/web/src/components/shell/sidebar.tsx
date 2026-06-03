@@ -46,6 +46,7 @@ function useNavGroups(): NavGroup[] {
 export function Sidebar() {
   const pathname = usePathname();
   const groups = useNavGroups();
+  const t = useTranslations("nav");
 
   return (
     <aside className="w-60 shrink-0 bg-slate-900 text-slate-100 flex flex-col min-h-screen">

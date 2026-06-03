@@ -1,4 +1,3 @@
-import argon2 from "argon2";
 import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/postgres-js";
 /**
@@ -9,6 +8,10 @@ import { drizzle } from "drizzle-orm/postgres-js";
  * Run: pnpm db:seed
  */
 import postgres from "postgres";
+
+// Pre-computed argon2id hash of "demo1234" — avoids native argon2 dep in packages/db
+const DEMO_PASSWORD_HASH =
+  "$argon2id$v=19$m=65536,t=3,p=4$9JXJz21ov2vrKnwXCgVpcA$lbzEPC1vElhHoYhQsc8vFMM2QecpaqCyoNUx5kgMLus";
 import * as schema from "../schema";
 
 const DATABASE_URL = process.env.DATABASE_URL;
@@ -49,7 +52,7 @@ async function seed() {
   console.log(`✓ Org: ${orgId}`);
 
   // ── Users (5) ─────────────────────────────────────────────────────────────
-  const demoPassword = await argon2.hash("demo1234", { type: argon2.argon2id });
+  const demoPassword = DEMO_PASSWORD_HASH;
 
   const [_userJamal] = await db
     .insert(schema.users)

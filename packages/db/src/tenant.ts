@@ -1,5 +1,5 @@
 ﻿import { sql } from "drizzle-orm";
-import type { Database } from "./client";
+import type { Database } from "./client.js";
 
 /**
  * Set the Postgres GUC `app.current_org` for the duration of a transaction

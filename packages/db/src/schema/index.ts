@@ -1,4 +1,4 @@
-﻿export * from "./organizations";
+export * from "./organizations";
 export * from "./users";
 export * from "./vehicles";
 export * from "./clients";
