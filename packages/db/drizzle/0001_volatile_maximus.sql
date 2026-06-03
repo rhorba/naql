@@ -1,0 +1,2 @@
+CREATE INDEX "alerts_org_resolved_idx" ON "alerts" USING btree ("organization_id","resolved_at");--> statement-breakpoint
+ALTER TABLE "invoice_number_sequences" ADD CONSTRAINT "invoice_seq_org_year_unique" UNIQUE("organization_id","year");

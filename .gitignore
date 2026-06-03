@@ -26,8 +26,8 @@ web-build/
 .env.test.local
 .env.production.local
 
-# DB / Drizzle
-drizzle/
+# DB / Drizzle — migrations are committed; only exclude local studio artifacts
+# drizzle/ is intentionally NOT ignored so migration SQL files reach CI
 
 # Testing
 coverage/
