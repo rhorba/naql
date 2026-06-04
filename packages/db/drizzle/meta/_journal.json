@@ -15,6 +15,13 @@
       "when": 1780398992194,
       "tag": "0001_volatile_maximus",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1748980800000,
+      "tag": "0002_rls_setup",
+      "breakpoints": true
     }
   ]
 }

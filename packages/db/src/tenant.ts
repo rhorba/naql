@@ -17,6 +17,10 @@ export async function withOrgContext<T>(
 ): Promise<T> {
   if (!organizationId) throw new Error("withOrgContext: organizationId is required");
   return db.transaction(async (tx) => {
+    // Switch to the app role so RLS policies are enforced.
+    // Superuser connections (migrations, tests) downgrade to naql_app within
+    // the transaction; production connections are already naql_app (no-op).
+    await tx.execute(sql`SET LOCAL ROLE naql_app`);
     await tx.execute(sql`SELECT set_config('app.current_org', ${organizationId}, true)`);
     return fn(tx as unknown as Database);
   });
