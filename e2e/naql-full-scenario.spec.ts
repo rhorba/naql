@@ -139,33 +139,33 @@ test.describe("Naql Full Scenario", () => {
     const signOutBtn = page
       .locator('button:has-text("Déconnexion"), button:has-text("Sign out")')
       .first();
-    if (await signOutBtn.isVisible()) {
-      await signOutBtn.click();
-      await page.waitForURL(/\/login/, { timeout: 10_000 });
-      await page.screenshot({ path: "docs/e2e-artifacts/17-signed-out.png", fullPage: true });
-    }
-
-    // Copy the Playwright-generated video to docs/
-    // (done in afterAll below)
+    await expect(signOutBtn).toBeVisible({ timeout: 5_000 });
+    await signOutBtn.click();
+    await page.waitForURL(/\/login/, { timeout: 10_000 });
+    await page.screenshot({ path: "docs/e2e-artifacts/17-signed-out.png", fullPage: true });
   });
-});
 
-test.afterAll(async () => {
-  // Playwright stores video at testInfo.outputPath() inside outputDir
-  // We copy the latest webm to docs/naql-scenario.webm
-  const artifactsDir = path.resolve("docs/e2e-artifacts");
-  if (!fs.existsSync(artifactsDir)) return;
+  test.afterAll(async () => {
+    const artifactsDir = path.resolve("docs/e2e-artifacts");
+    if (!fs.existsSync(artifactsDir)) return;
 
-  const webms = fs
-    .readdirSync(artifactsDir, { recursive: true })
-    .map((f) => String(f))
-    .filter((f) => f.endsWith(".webm"))
-    .map((f) => path.join(artifactsDir, f))
-    .sort((a, b) => fs.statSync(b).mtimeMs - fs.statSync(a).mtimeMs);
+    const collectWebms = (dir: string): string[] => {
+      const entries = fs.readdirSync(dir, { withFileTypes: true });
+      return entries.flatMap((e) => {
+        const full = path.join(dir, e.name);
+        if (e.isDirectory()) return collectWebms(full);
+        return e.name.endsWith(".webm") ? [full] : [];
+      });
+    };
 
-  if (webms[0] && fs.existsSync(webms[0])) {
-    const dest = path.resolve("docs/naql-scenario.webm");
-    fs.copyFileSync(webms[0], dest);
-    console.log("\n✅ Video saved → docs/naql-scenario.webm");
-  }
+    const webms = collectWebms(artifactsDir).sort(
+      (a, b) => fs.statSync(b).mtimeMs - fs.statSync(a).mtimeMs
+    );
+
+    if (webms[0]) {
+      const dest = path.resolve("docs/naql-scenario.webm");
+      fs.copyFileSync(webms[0], dest);
+      console.log("\n✅ Video saved → docs/naql-scenario.webm");
+    }
+  });
 });
